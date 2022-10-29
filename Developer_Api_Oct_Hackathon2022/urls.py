@@ -26,6 +26,7 @@ urlpatterns = [
 
     # accounts app main urls
     # home url
-    path('', index, name='index'),
+    path('home/', index, name='index'),
     path('accounts/',include('accounts.urls')),
+    path('', include('ApiApp.urls')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) # for 'media' folder setting purpose
