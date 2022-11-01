@@ -1,0 +1,1 @@
+web: gunicorn Developer_Api_Oct_Hackathon2022.wsgi --log-file -
