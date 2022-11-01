@@ -75,23 +75,29 @@ def advocate_list(request):
 def advocate_detail(request, username):
     advocate = Advocates.objects.get(username=username)
 
-    if request.method == 'GET':
-        serializer = AdvocateSerializer(advocate, many=False)
-        return Response(serializer.data)
+    if Advocates.objects.filter(username=username).exists():
+        advocate = Advocates.objects.get(username=username)
 
-    if request.method == 'PUT':
-        advocate.username = request.data['username']
-        advocate.name = request.data['name']
-        advocate.save()
-        print('data updated')
+        if request.method == 'GET':
+            serializer = AdvocateSerializer(advocate, many=False)
+            return Response(serializer.data)
 
-        serializer = AdvocateSerializer(advocate, many=False)
-        return Response(serializer.data)
+        if request.method == 'PUT':
+            advocate.username = request.data['username']
+            advocate.name = request.data['name']
+            advocate.save()
+            print('data updated')
 
-    if request.method == 'DELETE':
-        advocate.delete()
-        print('data deleted')
-        return Response('User '+ str(advocate.username) +' was deleted')
+            serializer = AdvocateSerializer(advocate, many=False)
+            return Response(serializer.data)
+
+        if request.method == 'DELETE':
+            advocate.delete()
+            print('data deleted')
+            return Response('User '+ str(advocate.username) +' was deleted')
+
+    else:
+        return Response(username +' does not exist')
 
 
 
