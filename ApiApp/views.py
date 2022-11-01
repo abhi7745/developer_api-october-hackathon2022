@@ -17,10 +17,11 @@ from django.db.models import Q
 @api_view(['GET'])
 def api(request):
     print(request.get_full_path())
-    data = ['Welcome-to-advocates', 'http://127.0.0.1:8000/advocates']
+    data = ['Welcome To October Hackathon 2022 - ⚙️ Challenge 1 - 🎃 APIs Edition', 'https://hackathon22.up.railway.app/advocates/', 'https://hackathon22.up.railway.app/advocates/francescociull4/']
     return Response(data)
 
-@api_view(['GET', 'POST'])
+# @api_view(['GET', 'POST'])
+@api_view(['GET'])
 def advocate_list(request):
 
     if request.method == 'GET':
@@ -69,7 +70,8 @@ def advocate_list(request):
             # return Response('Post request')
             return Response(serializer.data)
         
-@api_view(['GET', 'PUT', 'DELETE'])
+# @api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def advocate_detail(request, username):
     advocate = Advocates.objects.get(username=username)
 
