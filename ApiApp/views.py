@@ -26,7 +26,7 @@ def advocate_list(request):
     if request.method == 'GET':
 
         paginator = PageNumberPagination()
-        paginator.page_size = 1
+        paginator.page_size = 10
         person_objects = Advocates.objects.all()
         result_page = paginator.paginate_queryset(person_objects, request)
         # serializer = AdvocateSerializer(result_page, many=True)
