@@ -73,8 +73,7 @@ def advocate_list(request):
 # @api_view(['GET', 'PUT', 'DELETE'])
 @api_view(['GET'])
 def advocate_detail(request, username):
-    advocate = Advocates.objects.get(username=username)
-
+    
     if Advocates.objects.filter(username=username).exists():
         advocate = Advocates.objects.get(username=username)
 
