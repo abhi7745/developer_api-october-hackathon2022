@@ -17,10 +17,10 @@ from django.db.models import Q
 @api_view(['GET'])
 def api(request):
     print(request.get_full_path())
-    data = ['Welcome To October Hackathon 2022 - ⚙️ Challenge 1 - 🎃 APIs Edition', 'https://hackathon22.up.railway.app/advocates/', 'https://hackathon22.up.railway.app/advocates/francescociull4/']
+    data = ['Welcome To October Hackathon 2022 - ⚙️ Challenge 1 - 🎃 APIs Edition', 'https://hackathon22.pythonanywhere.com/advocates',
+            'https://hackathon22.pythonanywhere.com/advocates/francescociull4/' ]
     return Response(data)
 
-# @api_view(['GET', 'POST'])
 @api_view(['GET'])
 def advocate_list(request):
 
@@ -35,7 +35,7 @@ def advocate_list(request):
         if not request.GET.get('query') == None:
             # query = ''
             query = request.GET.get('query')
-            
+
             print('Query', query)
 
             if Advocates.objects.filter(Q(username__icontains=query) | Q(bio__icontains=query)).exists():
@@ -46,11 +46,11 @@ def advocate_list(request):
                 result_page = paginator.paginate_queryset(person_objects, request)
                 serializer = AdvocateSerializer(result_page, many=True)
                 return paginator.get_paginated_response(serializer.data)
-            
+
             else:
                 print(query+' not exist')
                 return Response(str(query)+' not exist')
-        
+
         # serializer = AdvocateSerializer(advocates, many=True)
         # return Response(serializer.data)
         serializer = AdvocateSerializer(result_page, many=True)
@@ -69,11 +69,11 @@ def advocate_list(request):
             print('data saved to database')
             # return Response('Post request')
             return Response(serializer.data)
-        
+
 # @api_view(['GET', 'PUT', 'DELETE'])
 @api_view(['GET'])
 def advocate_detail(request, username):
-    
+
     if Advocates.objects.filter(username=username).exists():
         advocate = Advocates.objects.get(username=username)
 
@@ -106,7 +106,7 @@ def advocate_detail(request, username):
 # from rest_framework.views import APIView
 
 # class AdvocatesDetail(APIView):
-    
+
 #     def get_object(self, username):
 #         try:
 #             return Advocates.objects.get(username=username)

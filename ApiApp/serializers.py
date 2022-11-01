@@ -6,7 +6,7 @@ class CompanySerializer(ModelSerializer):
     class Meta:
         model = Company
         # fields = '__all__'
-        fields = '__all__'
+        fields = ['name', 'bio', 'logo']
 
 
 class AdvocateSerializer(ModelSerializer):
