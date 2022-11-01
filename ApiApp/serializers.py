@@ -1,9 +1,17 @@
-from dataclasses import fields
 from rest_framework.serializers import ModelSerializer
-from .models import Advocates
+from .models import Advocates, Company
+
+
+class CompanySerializer(ModelSerializer):
+    class Meta:
+        model = Company
+        # fields = '__all__'
+        fields = '__all__'
 
 
 class AdvocateSerializer(ModelSerializer):
+    company = CompanySerializer()
     class Meta:
         model = Advocates
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['username', 'name', 'bio', 'profile_pic', 'twitter', 'company']
