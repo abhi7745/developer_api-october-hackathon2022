@@ -41,7 +41,7 @@ def advocate_list(request):
             if Advocates.objects.filter(Q(username__icontains=query) | Q(bio__icontains=query)).exists():
                 advocates = Advocates.objects.filter(Q(username__icontains=query) | Q(bio__icontains=query))
                 paginator = PageNumberPagination()
-                paginator.page_size = 1
+                paginator.page_size = 10
                 person_objects = advocates
                 result_page = paginator.paginate_queryset(person_objects, request)
                 serializer = AdvocateSerializer(result_page, many=True)
@@ -49,7 +49,7 @@ def advocate_list(request):
             
             else:
                 print(query+' not exist')
-                return Response(str(query)+' not exist')
+                return Response(str(query)+' does not exist')
         
         # serializer = AdvocateSerializer(advocates, many=True)
         # return Response(serializer.data)
