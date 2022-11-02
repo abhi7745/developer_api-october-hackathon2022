@@ -17,7 +17,7 @@ from django.db.models import Q
 @api_view(['GET'])
 def api(request):
     print(request.get_full_path())
-    data = ['Welcome To October Hackathon 2022 - ⚙️ Challenge 1 - 🎃 APIs Edition', 'https://hackathon22.up.railway.app/advocates/', 'https://hackathon22.up.railway.app/advocates/francescociull4/']
+    data = ['Welcome To October Hackathon 2022 - ⚙️ Challenge 1 - 🎃 APIs Edition', 'https://hackathon22.up.railway.app/advocates/', 'https://hackathon22.up.railway.app/advocates/francescociull4/', 'https://hackathon22.up.railway.app/advocates/?query=dennisivy11']
     return Response(data)
 
 # @api_view(['GET', 'POST'])
