@@ -18,7 +18,7 @@ from django.db.models import Q
 def api(request):
     print(request.get_full_path())
     data = ['Welcome To October Hackathon 2022 - ⚙️ Challenge 1 - 🎃 APIs Edition', 'https://hackathon22.pythonanywhere.com/advocates',
-            'https://hackathon22.pythonanywhere.com/advocates/francescociull4/' ]
+            'https://hackathon22.pythonanywhere.com/advocates/francescociull4/' , 'https://hackathon22.pythonanywhere.com/advocates/?query=dennisivy11']
     return Response(data)
 
 @api_view(['GET'])
@@ -41,7 +41,7 @@ def advocate_list(request):
             if Advocates.objects.filter(Q(username__icontains=query) | Q(bio__icontains=query)).exists():
                 advocates = Advocates.objects.filter(Q(username__icontains=query) | Q(bio__icontains=query))
                 paginator = PageNumberPagination()
-                paginator.page_size = 1
+                paginator.page_size = 10
                 person_objects = advocates
                 result_page = paginator.paginate_queryset(person_objects, request)
                 serializer = AdvocateSerializer(result_page, many=True)
